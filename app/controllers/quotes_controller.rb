@@ -1,11 +1,14 @@
 class QuotesController < Rulers::Controller
   def a_quote
-    "There is nothing good or bad" + 
-    "but thinking makes it so." +
-    "\n<pre>\n#{env}\n</pre>"
+    @test = 'crikey mate!'
+    render :a_quote, noun: :winking
   end
 
   def exception
     raise "It's a bad one!"
+  end
+
+  def index
+    render :index
   end
 end
