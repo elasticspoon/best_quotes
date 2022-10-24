@@ -9,6 +9,23 @@ class QuotesController < Rulers::Controller
   end
 
   def index
-    render :index
+    quotes = FileModel.all
+    render :index, quotes: quotes
+  end
+
+  def quote_1
+    quote_one = FileModel.find(1)
+    render :quote, obj: quote_one
+  end
+
+  def new_quote
+    attrs = {
+      'submitter' => 'web user',
+      'quote' => 'a picture is worth a thousand words',
+      'attribution' => 'me'
+    }
+
+    m = FileModel.create attrs
+    render :quote, obj: m
   end
 end
