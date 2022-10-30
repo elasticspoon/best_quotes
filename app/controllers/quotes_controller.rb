@@ -2,7 +2,7 @@ require 'uri'
 class QuotesController < Rulers::Controller
   def a_quote
     @test = 'crikey mate!'
-    render :a_quote, noun: :winking
+    render_response :a_quote, noun: :winking
   end
 
   def exception
@@ -10,13 +10,12 @@ class QuotesController < Rulers::Controller
   end
 
   def index
-    quotes = FileModel.all
-    render :index, quotes: quotes
+    @quotes = FileModel.all
   end
 
   def quote_1
     quote_one = FileModel.find(1)
-    render :quote, obj: quote_one
+    render_response :quote, obj: quote_one
   end
 
   def new_quote
@@ -27,7 +26,7 @@ class QuotesController < Rulers::Controller
     }
 
     m = FileModel.create attrs
-    render :quote, obj: m
+    render_response :quote, obj: m
   end
 
   def update_quote
@@ -38,10 +37,15 @@ class QuotesController < Rulers::Controller
     ''
   end
 
-  def submitter_index
-    submitters = FileModel.all.map { |model| model['submitter'] }.uniq
+  def show
+    quote = FileModel.find(params['id'])
+    ua = request.user_agent
+    render_response(:quote, obj: quote, ua:)
+    puts 'some debugging text for fun'
+  end
 
-    render :submitter_index, submitters: submitters
+  def submitter_index
+    @submitters = FileModel.all.map { |model| model['submitter'] }.uniq
   end
 
   def submitter_quotes
@@ -52,7 +56,11 @@ class QuotesController < Rulers::Controller
       arr + FileModel.find_all_by_submitter(val) 
     end.compact
 
-    render :index, quotes: quotes
+    render_response(:index, quotes: quotes)
+  end
+
+  def another_method
+    @var = 'hello'
   end
 
   private
