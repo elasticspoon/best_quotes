@@ -1,10 +1,11 @@
 PATH
   remote: ../rulers
   specs:
-    rulers (0.0.6)
+    rulers (0.0.7)
       erubis
       multi_json
       rack (~> 2.2.4)
+      sqlite3
 
 GEM
   remote: https://rubygems.org/
@@ -24,6 +25,7 @@ GEM
       ffi (~> 1.0)
     rerun (0.13.1)
       listen (~> 3.0)
+    sqlite3 (1.5.3-x86_64-linux)
 
 PLATFORMS
   x86_64-linux
