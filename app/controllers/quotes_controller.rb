@@ -41,7 +41,6 @@ class QuotesController < Rulers::Controller
     quote = FileModel.find(params['id'])
     ua = request.user_agent
     render_response(:quote, obj: quote, ua:)
-    puts 'some debugging text for fun'
   end
 
   def submitter_index
