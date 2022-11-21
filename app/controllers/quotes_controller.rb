@@ -11,6 +11,7 @@ class QuotesController < Rulers::Controller
 
   def index
     @quotes = FileModel.all
+    # render_response :index, quotes: @quotes
   end
 
   def quote_1
@@ -39,6 +40,7 @@ class QuotesController < Rulers::Controller
 
   def show
     quote = FileModel.find(params['id'])
+    puts "id: #{params.inspect}"
     ua = request.user_agent
     render_response(:quote, obj: quote, ua:)
   end
